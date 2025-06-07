@@ -8,6 +8,7 @@ import { PasswordService } from './services/password.service';
 import { JwtTokenService } from './services/jwt.service';
 import { TokenBlacklistService } from './services/token-blacklist.service';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
+import { DbModule } from 'src/db/db.module';
 
 @Module({
   imports: [
@@ -22,7 +23,8 @@ import { JwtAuthGuard } from './guards/jwt-auth.guard';
       }),
       inject: [ConfigService],
     }),
-    AuthModule
+    AuthModule,
+    DbModule
   ],
   controllers: [AuthController],
   providers: [

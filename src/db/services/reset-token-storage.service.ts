@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { LevelDbService } from './leveldb.service';
+import { DbService } from '../db.service';
 
 export interface ResetToken {
     token: string;
@@ -14,7 +14,7 @@ export class ResetTokenStorageService {
     private readonly RESET_TOKEN_PREFIX = 'reset_token:';
     private readonly CLEANUP_INTERVAL = 1800000; // 30 minutes
 
-    constructor(private readonly levelDbService: LevelDbService) {
+    constructor(private readonly levelDbService: DbService) {
         // Ejecutar limpieza periódica de tokens expirados
         setInterval(() => {
             this.cleanExpiredTokens().catch(console.error);

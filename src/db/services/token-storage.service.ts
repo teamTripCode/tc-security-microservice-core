@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { LevelDbService } from './leveldb.service';
+import { DbService } from '../db.service';
 
 export interface BlacklistedToken {
     token: string;
@@ -14,7 +14,7 @@ export class TokenStorageService {
     private readonly BLACKLIST_PREFIX = 'blacklist:';
     private readonly CLEANUP_INTERVAL = 3600000; // 1 hour
 
-    constructor(private readonly levelDbService: LevelDbService) {
+    constructor(private readonly levelDbService: DbService) {
         // Ejecutar limpieza periódica de tokens expirados
         setInterval(() => {
             this.cleanExpiredTokens().catch(console.error);

@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { LevelDbService } from './leveldb.service';
+import { DbService } from '../db.service';
 
 export interface CachedUserSession {
     userId: string;
@@ -18,7 +18,7 @@ export class UserCacheService {
     private readonly LOGIN_ATTEMPTS_PREFIX = 'login_attempts:';
     private readonly CLEANUP_INTERVAL = 7200000; // 2 hours
 
-    constructor(private readonly levelDbService: LevelDbService) {
+    constructor(private readonly levelDbService: DbService) {
         // Ejecutar limpieza periódica
         setInterval(() => {
             this.cleanExpiredSessions().catch(console.error);
